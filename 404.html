@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HandBase a déménagé</title>
+<meta name="robots" content="noindex">
+<script>
+  // Redirige vers la même page à la nouvelle adresse (chemin, paramètres et ancre conservés).
+  var NEW = 'https://handbase-app.github.io';
+  var target = NEW + location.pathname + location.search + location.hash;
+  // Supprime l'ancienne version hors ligne de l'app, puis redirige.
+  (navigator.serviceWorker ? navigator.serviceWorker.getRegistrations() : Promise.resolve([]))
+    .then(function (rs) { return Promise.all(rs.map(function (r) { return r.unregister(); })); })
+    .then(function () { return window.caches ? caches.keys().then(function (ks) { return Promise.all(ks.map(function (k) { return caches.delete(k); })); }) : null; })
+    .catch(function () {})
+    .then(function () { location.replace(target); });
+</script>
+<style>
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #1e1e2e; color: #ececf4; font: 15px/1.5 ui-monospace, monospace; text-align: center; padding: 16px; box-sizing: border-box; }
+  a { color: #f43f5e; font-weight: 700; }
+</style>
+</head>
+<body>
+  <p>HandBase a déménagé.<br>Redirection vers <a href="https://handbase-app.github.io/HandBase/">handbase-app.github.io/HandBase</a>…</p>
+</body>
+</html>
